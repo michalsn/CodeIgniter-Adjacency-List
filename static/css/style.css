@@ -1,0 +1,88 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+#btn-add {
+    margin-top: -40px;
+}
+
+.placeholder {
+    border: 1px dashed #4183C4;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ui-nestedSortable-error {
+    background:#fbe3e4;
+    color:#8a1f11;
+}
+
+ol {
+    margin: 0;
+    padding: 0;
+    padding-left: 30px;
+}
+
+ol.sortable, ol.sortable ol {
+    margin: 0 0 0 25px;
+    padding: 0;
+    list-style-type: none;
+}
+
+ol.sortable {
+    margin: 0;
+}
+
+.sortable li {
+    margin: 7px 0 0 0;
+    padding: 0;
+}
+
+.sortable li div  {
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-color: #D4D4D4 #D4D4D4 #BCBCBC;
+    padding: 6px 6px 6px 10px;
+    margin: 0px;
+    background: #f6f6f6;
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed));
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: -o-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
+}
+.sortable li div:hover { background: #f6f6f6;}
+
+.sortable .icon-move { cursor: move; }
+
+.sortable li div span {
+    float: right;
+    margin-top: -1px;
+    display: none;
+}
+
+.info_wrapper{border:1px solid #ddd;margin-bottom:15px;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
+.info_header{margin:0;background:#eee;padding:10px 10px;color:#444;text-shadow:1px 1px 0 #fff;font-size:16px;}
+.info_title{font-weight:bold;}
+.info_box{border-top:1px solid #ddd;padding:10px;margin:0;}
+
+#loader {
+    background: #fff;
+    width: 100px;
+    height: 60px;
+    padding-top: 40px;
+    margin: 10px auto;
+    display: none;
+    text-align: center;
+    border: 1px solid #ccc;
+    position: fixed;
+    margin:-50px 0 0 -50px;
+    top: 50%;
+    left: 50%
+}
