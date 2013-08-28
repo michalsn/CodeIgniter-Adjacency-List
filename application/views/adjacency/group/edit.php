@@ -5,7 +5,7 @@
 
         <div class="row">
             <div class="span12">
-                <?php echo form_open('al/edit_group'.$id, array('class'=>'form-horizontal')); ?>
+                <?php echo form_open('al/edit_group/'.$id, array('class'=>'form-horizontal')); ?>
                     <fieldset>
                         <div class="control-group">
                             <label class="control-label" for="name">Name</label>
