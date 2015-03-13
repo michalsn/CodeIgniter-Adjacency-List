@@ -86,3 +86,88 @@ if ( ! function_exists('build_tree'))
         }
     }
 }
+
+/**
+ * Build breadcrumb
+ *
+ * Creates breadcrumb based on group id or slug and current id
+ *
+ * @access  public
+ * @param   mixed   group id or slug
+ * @param   mixed   any attributes
+ * @param   int     current item id
+ * @param   array   tree array
+ * @param   array   output tree array
+ * @return  mixed
+ */
+if ( ! function_exists('build_breadcrumb'))
+{
+    function build_breadcrumb($group, $item_id, $attributes = array(), &$tree = NULL, &$output_tree = array())
+    {
+        if ($tree === NULL)
+        {
+            $CI =& get_instance();
+            $CI->load->library('adjacency_list');
+            $tree = $CI->adjacency_list->get_all($group);
+        }
+
+        if (is_array($tree))
+        {
+            foreach ($tree as $leaf)
+            {
+                if ($item_id === (int) $leaf['id'])
+                {
+                    array_push($output_tree, $leaf);
+
+                    build_breadcrumb($group, (int) $leaf['parent_id'], $attributes, $tree, $output_tree);
+                }
+            }
+
+            return format_breadcrumb(array_reverse($output_tree), $item_id, $attributes);
+        }
+
+        return '';
+    }
+}
+
+/**
+ * Format breadcrumb
+ *
+ * Format breadcrumb based on array
+ *
+ * @access  public
+ * @param   array   array list
+ * @param   int     current item id
+ * @param   mixed   any attributes
+ * @return  string
+ */
+if ( ! function_exists('format_breadcrumb'))
+{
+    function format_breadcrumb($array, $item_id, $attributes = array())
+    {
+        foreach (array('start_tag' => '<li>', 'end_tag' => '</li>', 'start_tag_active' => '<li class="active">', 'divider' => ' <span class="divider">/</span>') as $key => $val)
+        {
+            $atts[$key] = ( ! isset($attributes[$key])) ? $val : $attributes[$key];
+            unset($attributes[$key]);
+        }
+
+        $output = '';
+
+        if (is_array($array))
+        {
+            foreach ($array as $item)
+            {
+                if ($item_id === (int) $item['id'])
+                {
+                    $output .= $atts['start_tag_active'] . $item['name'] . $atts['end_tag'];
+                }
+                else
+                {
+                    $output .= $atts['start_tag'] . '<a href="' . $item['url'] . '">' . $item['name'] . '</a>' . $atts['divider'] . $atts['end_tag'];
+                }   
+            }
+        }
+
+        return $output;
+    }
+}

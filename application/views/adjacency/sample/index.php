@@ -26,4 +26,16 @@
             </ol>
         </div>
     </div>
+    <div class="row">
+        <div class="span4">
+            <pre><code>
+&lt;ul class="breadcrumb"&gt;
+    &lt;?php echo build_breadcrumb('languages', 4); ?&gt;
+&lt;/ul&gt;
+            </code></pre>
+            <ul class="breadcrumb">
+                <?php echo build_breadcrumb('languages', 4); ?>
+            </ul>
+        </div>
+    </div>
 <?php echo $this->load->view('partials/footer'); ?>
