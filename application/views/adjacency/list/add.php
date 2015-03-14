@@ -1,4 +1,4 @@
-<?php echo $this->load->view('partials/header'); ?>
+<?php $this->load->view('partials/header'); ?>
         <div class="page-header">
             <h1><?php echo $title; ?> <small>Navigation: <?php echo $navigation['name']; ?></small></h1>
         </div>
@@ -33,4 +33,4 @@
                 <?php echo form_close(); ?>
             </div>
         </div>
-<?php echo $this->load->view('partials/footer'); ?>
+<?php $this->load->view('partials/footer'); ?>

@@ -1,4 +1,4 @@
-<?php echo $this->load->view('partials/header'); ?>
+<?php $this->load->view('partials/header'); ?>
         <div class="page-header">
             <h1><?php echo $title; ?> <small>Manage navigation</small></h1>
             <a id="btn-add" class="btn btn-success pull-right" href="<?php echo site_url('al/add_group'); ?>"><i class="icon-plus icon-white"></i> Add navigation group</a>
@@ -39,4 +39,4 @@
             </div>
             <div class="modal-footer"></div>
         </div>
-<?php echo $this->load->view('partials/footer'); ?>
+<?php $this->load->view('partials/footer'); ?>

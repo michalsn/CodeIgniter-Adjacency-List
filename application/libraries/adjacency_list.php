@@ -1,169 +1,128 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
-* Name:  Adjacency List
-*
-* Author: Michał Śniatała
-*         michal@sniatala.pl
-*         @michalsn
-*
-* Requirements: PHP5 or above
-*
-* License: MIT
-*
-*/
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Adjacency List
+ *
+ * @package Library
+ * @author  Michał Śniatała <michal@sniatala.pl>
+ * @license http://opensource.org/licenses/MIT  (MIT)
+ * @since   Version 0.1
+ */
 class Adjacency_list
 {
-    /**
-    * Holds an value of adjacency max levels
-    *
-    * @var int
-    */
-    public $max_levels;
+	/**
+	* Holds an value of adjacency max levels.
+	*
+	* @var int
+	*/
+	public $max_levels;
 
-    /**
-    * Holds an value of configuration for dropdown list
-    *
-    * @var array
-    */
-    public $dropdown;
+	/**
+	* Holds an value of configuration for dropdown list.
+	*
+	* @var array
+	*/
+	public $dropdown;
 
-    /**
-    * __construct
-    *
-    * @return void
-    */
-    public function __construct()
-    {
-        $this->load->config('adjacency_list', TRUE);
-        $this->lang->load('adjacency_list');
-        $this->load->model('adjacency_list_model');
+	//--------------------------------------------------------------------
 
-        $this->max_levels = $this->config->item('max_levels', 'adjacency_list');
-        $this->dropdown = $this->config->item('dropdown', 'adjacency_list');
-    }
+	/**
+	 * __construct
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->load->config('adjacency_list', TRUE);
+		$this->lang->load('adjacency_list');
+		$this->load->model('adjacency_list_model');
+		$this->load->helper('adjacency_list');
 
-    /**
-    * __call
-    *
-    * Acts as a simple way to call model methods without loads of alias'
-    *
-    */
-    public function __call($method, $arguments)
-    {
-        if ( ! method_exists($this->adjacency_list_model, $method))
-        {
-            throw new Exception('Undefined method Adjacency_list::' . $method . '() called');
-        }
+		$this->max_levels = $this->config->item('max_levels', 'adjacency_list');
+		$this->dropdown = $this->config->item('dropdown', 'adjacency_list');
+	}
 
-        return call_user_func_array(array($this->adjacency_list_model, $method), $arguments);
-    }
+	//--------------------------------------------------------------------
 
-    /**
-    * __get
-    *
-    * Enables the use of CI super-global without having to define an extra variable.
-    *
-    * @access	public
-    * @param	$var
-    * @return	mixed
-    */
-    public function __get($var)
-    {
-        return get_instance()->$var;
-    }
+	/**
+	 * __call
+	 *
+	 * Acts as a simple way to call model methods without loads of alias'
+	 *
+	 * @param string $method    Method
+	 * @param string $arguments Arguments
+	 *
+	 * @return mixed
+	 */
+	public function __call($method, $arguments)
+	{
+		if ( ! method_exists($this->adjacency_list_model, $method))
+		{
+			throw new Exception('Undefined method Adjacency_list::' . $method . '() called');
+		}
 
-    /**
-    * Get all items by group id or slug
-    *
-    * @access	public
-    * @param	mixed
-    * @return 	mixed
-    */
-    public function get_all_by_group($group = 1)
-    {
-        if ($query = $this->adjacency_list_model->get_all($group))
-        {
-            $tree = array();
+		return call_user_func_array(array($this->adjacency_list_model, $method), $arguments);
+	}
 
-            foreach ($query as $row)
-            {
-                $tree[$row['id']] = $row;
-            }
+	//--------------------------------------------------------------------
 
-            unset($query);
+	/**
+	 * __get
+	 *
+	 * Enables the use of CI super-global without having to define an extra variable.
+	 *
+	 * @param mixed $var Var
+	 *
+	 * @return	mixed
+	 */
+	public function __get($var)
+	{
+		return get_instance()->$var;
+	}
 
-            $tree_array = array();
+	//--------------------------------------------------------------------
 
-            foreach ($tree as $leaf)
-            {
-                if (array_key_exists($leaf['parent_id'], $tree))
-                {
-                    $tree[$leaf['parent_id']]['children'][] = &$tree[$leaf['id']];
-                }
+	/**
+	 * Get all items from group to dropdown array
+	 *
+	 * @param int   $group_id Group id
+	 * @param int   $exclude  Excluded id
+	 * @param int   $level    Current level
+	 * @param array &$tree    Tree array
+	 *
+	 * @return array
+	 */
+	public function get_all_for_dropdown($group_id = 1, $exclude = 0, $level = 0, &$tree = array())
+	{
+		$output = array();
 
-                if ( ! isset($tree[$leaf['id']]['children']))
-                {
-                    $tree[$leaf['id']]['children'] = array();
-                }
+		if ($level === 0)
+		{
+			$tree = parse_children($this->get_all($group_id));
+			$output[0] = $this->dropdown['parent'];
+		}
 
-                if ($leaf['parent_id'] == 0)
-                {
-                    $tree_array[] = &$tree[$leaf['id']];
-                }
-            }
+		if ( ! empty($tree))
+		{
+			foreach ($tree as &$leaf)
+			{
+				if ($exclude != (int) $leaf['id'])
+				{
+					$output[$leaf['id']] = str_repeat($this->dropdown['space'], $level) . ' ' . $leaf['name'];
 
-            return $tree_array;
-        }
-        else
-        {
-            return FALSE;
-        }
-    }
+					if ((($this->max_levels !== 0) && ($this->max_levels > $level + 1)) || ($this->max_levels === 0) || ($exclude === 0))
+					{
+						if (isset($leaf['children']) && ! empty($leaf['children']))
+						{						
+							$output += $this->get_all_for_dropdown($group_id, $exclude, $level + 1, $leaf['children']);	
+						}
+					}
+				}
+			}
+		}
 
-    /**
-    * Get all items from group to dropdown array
-    *
-    * @access  public
-    * @param  mixed
-    * @param  integer
-    * @param  integer
-    * @param  mixed
-    * @return array
-    */
-    public function get_all_for_dropdown($group_id = 1, $exclude = 0, $level = 0, &$tree = NULL)
-    {
-        $output = array();
-
-        if ($level == 0)
-        {
-            $tree = $this->get_all_by_group($group_id);
-            $output[0] = $this->dropdown['parent'];
-        }
-
-        if (is_array($tree))
-        {
-            foreach ($tree as $leaf)
-            {
-                if ($exclude != $leaf['id'])
-                {
-                    $output[$leaf['id']] = str_repeat($this->dropdown['space'], $level) . ' ' . $leaf['name'];
-
-                    if ((($this->max_levels != 0) && ($this->max_levels > $level + 1)) || ($this->max_levels == 0) || ($exclude == 0))
-                    {
-                        if (isset($leaf['children']) && ! empty($leaf['children']))
-                        {						
-                            $output += $this->get_all_for_dropdown($group_id, $exclude, $level + 1, $leaf['children']);	
-                        }
-                    }
-                }
-            }
-        }
-
-        return $output;
-    }
-
+		return $output;
+	}
 }
- 
 /* End of file adjacency_list.php */
-/* Location: ./application/libraries/adjacency_list.php */
+/* Location: ./libraries/adjacency_list.php */
