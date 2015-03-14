@@ -12,3 +12,8 @@ How to start?
 - Import ``database.sql`` file to your database
 
 You're ready to go - ``http://localhost/your_project/index.php/al``
+
+Screenshots
+-----------
+
+![](https://github.com/michalsn/CodeIgniter-Adjacency-List/blob/master/_screenshots/navigation.png)
