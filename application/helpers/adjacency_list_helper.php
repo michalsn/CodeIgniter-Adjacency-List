@@ -66,7 +66,8 @@ if ( ! function_exists('build_tree'))
 		{
 			$CI =& get_instance();
 			$CI->load->library('adjacency_list');
-			$tree = parse_children($CI->adjacency_list->get_all($group));
+			$group_name=$CI->adjacency_list->get_all($group);
+			$tree = parse_children($group_name);
 		}
 
 		foreach (array('start_tag' => '<li>', 'end_tag' => '</li>', 'sub_start_tag' => '<ul>', 'sub_end_tag' => '</ul>') as $key => $val)
@@ -224,8 +225,11 @@ if ( ! function_exists('build_tree_item'))
 					build_tree_item($group, (int) $leaf['parent_id'], $attributes, $tree, $output_tree);
 				}
 			}
+			
+			$parsed_children=parse_children($tree);
+			$reversed_output_tree=array_reverse($output_tree);
 
-			return format_tree(parse_children($tree), array_reverse($output_tree), $attributes);
+			return format_tree( $parsed_children, $reversed_output_tree, $attributes);
 		}
 
 		return '';
