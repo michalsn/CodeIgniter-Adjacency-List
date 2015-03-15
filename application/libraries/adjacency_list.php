@@ -98,7 +98,8 @@ class Adjacency_list
 
 		if ($level === 0)
 		{
-			$tree = parse_children($this->get_all($group_id));
+			$get_group=$this->get_all($group_id);
+			$tree = parse_children($get_group);
 			$output[0] = $this->dropdown['parent'];
 		}
 
