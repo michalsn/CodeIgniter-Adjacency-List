@@ -34,8 +34,9 @@ class Al extends CI_Controller {
 
 		foreach ($groups as $group)
 		{
+			$items                                 = $this->adjacency_list->get_all($group['id']);
 			$data['groups'][$group['id']]          = $group;
-			$data['groups'][$group['id']]['items'] = parse_children($this->adjacency_list->get_all($group['id']));
+			$data['groups'][$group['id']]['items'] = parse_children($items);
 		}
 
 		$data['title'] = 'Navigation';

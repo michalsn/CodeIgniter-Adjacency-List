@@ -39,7 +39,7 @@ class Adjacency_list
 		$this->load->helper('adjacency_list');
 
 		$this->max_levels = $this->config->item('max_levels', 'adjacency_list');
-		$this->dropdown = $this->config->item('dropdown', 'adjacency_list');
+		$this->dropdown   = $this->config->item('dropdown', 'adjacency_list');
 	}
 
 	//--------------------------------------------------------------------
@@ -98,8 +98,8 @@ class Adjacency_list
 
 		if ($level === 0)
 		{
-			$get_group=$this->get_all($group_id);
-			$tree = parse_children($get_group);
+			$tree      = $this->get_all($group_id);
+			$tree      = parse_children($tree);
 			$output[0] = $this->dropdown['parent'];
 		}
 

@@ -66,8 +66,9 @@ if ( ! function_exists('build_tree'))
 		{
 			$CI =& get_instance();
 			$CI->load->library('adjacency_list');
-			$group_name=$CI->adjacency_list->get_all($group);
-			$tree = parse_children($group_name);
+
+			$tree = $CI->adjacency_list->get_all($group);
+			$tree = parse_children($tree);
 		}
 
 		foreach (array('start_tag' => '<li>', 'end_tag' => '</li>', 'sub_start_tag' => '<ul>', 'sub_end_tag' => '</ul>') as $key => $val)
@@ -122,6 +123,7 @@ if ( ! function_exists('build_breadcrumb'))
 		{
 			$CI =& get_instance();
 			$CI->load->library('adjacency_list');
+
 			$tree = $CI->adjacency_list->get_all($group);
 		}
 
@@ -201,16 +203,17 @@ if ( ! function_exists('build_tree_item'))
 	 * @param int   $item_id      Current item id
 	 * @param array $attributes   Any attributes
 	 * @param array &$tree        Tree array
-	 * @param array &$output_tree Output tree array
+	 * @param array &$in_array    Output tree array
 	 *
 	 * @return string
 	 */
-	function build_tree_item($group, $item_id, $attributes = array(), &$tree = NULL, &$output_tree = array())
+	function build_tree_item($group, $item_id, $attributes = array(), &$tree = NULL, &$in_array = array())
 	{
 		if (empty($tree))
 		{
 			$CI =& get_instance();
 			$CI->load->library('adjacency_list');
+
 			$tree = $CI->adjacency_list->get_all($group);
 		}
 
@@ -220,16 +223,16 @@ if ( ! function_exists('build_tree_item'))
 			{
 				if ($item_id === (int) $leaf['id'])
 				{
-					array_push($output_tree, $leaf['id']);
+					array_push($in_array, $leaf['id']);
 
-					build_tree_item($group, (int) $leaf['parent_id'], $attributes, $tree, $output_tree);
+					build_tree_item($group, (int) $leaf['parent_id'], $attributes, $tree, $in_array);
 				}
 			}
 			
-			$parsed_children=parse_children($tree);
-			$reversed_output_tree=array_reverse($output_tree);
+			$tree     = parse_children($tree);
+			$in_array = array_reverse($in_array);
 
-			return format_tree( $parsed_children, $reversed_output_tree, $attributes);
+			return format_tree($tree, $in_array, $attributes);
 		}
 
 		return '';
