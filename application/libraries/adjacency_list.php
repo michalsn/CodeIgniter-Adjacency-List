@@ -109,7 +109,7 @@ class Adjacency_list
 			{
 				if ($exclude != (int) $leaf['id'])
 				{
-					$output[$leaf['id']] = str_repeat($this->dropdown['space'], $level) . ' ' . $leaf['name'];
+					$output[$leaf['id']] = str_repeat($this->dropdown['space'], $level) . ' ' . htmlspecialchars($leaf['name'], ENT_QUOTES, 'UTF-8');
 
 					if ((($this->max_levels !== 0) && ($this->max_levels > $level + 1)) || ($this->max_levels === 0) || ($exclude === 0))
 					{
