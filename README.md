@@ -22,9 +22,6 @@ Starting with CodeIgniter 3.0, all class filenames (libraries, drivers, controll
     models/adjacency_list_model.php => models/Adjacency_list_model.php
     libraries/adjacency_list.php    => libraries/Adjacency_list.php
 
-Last thing - please add ``security`` helper to your autoload file.
-
-
 Screenshots
 -----------
 
