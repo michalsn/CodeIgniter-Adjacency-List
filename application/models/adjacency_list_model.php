@@ -13,14 +13,14 @@ class Adjacency_list_model extends CI_Model
 	/**
 	 * Holds an array of used tables.
 	 *
-	 * @var string
+	 * @var array
 	 */
 	public $tables = array();
 
 	/**
 	 * Holds an array of used flash names.
 	 *
-	 * @var string
+	 * @var array
 	 */
 	public $flash = array();
 
