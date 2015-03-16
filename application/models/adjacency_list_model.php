@@ -38,7 +38,6 @@ class Adjacency_list_model extends CI_Model
 		$this->load->database();
 		$this->load->config('adjacency_list', TRUE);
 		$this->lang->load('adjacency_list');
-		$this->load->helper('security');
 
 		$this->tables = $this->config->item('tables', 'adjacency_list');
 		$this->flash  = $this->config->item('flash', 'adjacency_list');		
@@ -288,18 +287,17 @@ class Adjacency_list_model extends CI_Model
 	 */
 	public function delete_group($item_id)
 	{
-                $this->db->trans_start();
+		$this->db->trans_start();
 
 		$this->db->where('id', $item_id)->delete($this->tables['groups']);
 		$ar = $this->db->affected_rows();
-
 
 		if ($ar)
 		{
 			$this->db->where('group_id', $item_id)->delete($this->tables['lists']);
 		}
 
-                $this->db->trans_complete();
+		$this->db->trans_complete();
 
 		if ($this->db->trans_status() ? $ar : FALSE)
 		{
