@@ -28,6 +28,8 @@ if ( ! function_exists('build_admin_tree'))
 		{
 			foreach ($tree as &$leaf)
 			{
+				$leaf['name'] = htmlspecialchars($leaf['name'], ENT_QUOTES, 'UTF-8');
+
 				if (isset($leaf['children']) && ! empty($leaf['children']))
 				{
 					$output .= '<li id="list_' . $leaf['id'] . '"><div><i class="icon-move"></i> ' . $leaf['name'] . '<span><a class="btn btn-primary btn-mini" href="' . site_url('al/edit/' . $leaf['id']) . '"><i class="icon-pencil icon-white"></i> Edit</a> <a class="btn btn-danger btn-mini delete" data-toggle="modal" data-type="item" data-href="' . site_url('al/delete/' . $leaf['id']) . '" data-name="' . $leaf['name'] . '" href="javascript:;"><i class="icon-trash icon-white"></i> Delete</a></span></div>';
@@ -83,6 +85,8 @@ if ( ! function_exists('build_tree'))
 		{
 			foreach ($tree as &$leaf)
 			{
+				$leaf['name'] = htmlspecialchars($leaf['name'], ENT_QUOTES, 'UTF-8');
+
 				if (isset($leaf['children']) && ! empty($leaf['children']))
 				{
 					$output .= $atts['start_tag'] . '<a href="' . $leaf['url'] . '">' . $leaf['name'] . '</a>';
@@ -175,6 +179,8 @@ if ( ! function_exists('format_breadcrumb'))
 		{
 			foreach ($array as &$item)
 			{
+				$item['name'] = htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8');
+
 				if ($item_id === (int) $item['id'])
 				{
 					$output .= $atts['start_tag_active'] . $item['name'] . $atts['end_tag'];
@@ -268,6 +274,8 @@ if ( ! function_exists('format_tree'))
 		{
 			foreach ($tree as &$leaf)
 			{
+				$leaf['name'] = htmlspecialchars($leaf['name'], ENT_QUOTES, 'UTF-8');
+				
 				if (isset($leaf['children']) && ! empty($leaf['children']) && (in_array($leaf['id'], $in_array)))
 				{
 					$output .= $atts['start_tag'] . '<a href="' . $leaf['url'] . '">' . $leaf['name'] . '</a>';

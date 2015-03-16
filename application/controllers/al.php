@@ -55,9 +55,9 @@ class Al extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">×</a>', '</div>');
-		$this->form_validation->set_rules('name', 'Name', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('url', 'URL', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('parent_id', 'Parent', 'required|integer|xss_clean');
+		$this->form_validation->set_rules('name', 'Name', 'required|trim');
+		$this->form_validation->set_rules('url', 'URL', 'required|trim');
+		$this->form_validation->set_rules('parent_id', 'Parent', 'required|integer');
 
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -89,9 +89,9 @@ class Al extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">×</a>', '</div>');
-		$this->form_validation->set_rules('name', 'Name', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('url', 'URL', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('parent_id', 'Parent', 'required|integer|xss_clean');
+		$this->form_validation->set_rules('name', 'Name', 'required|trim');
+		$this->form_validation->set_rules('url', 'URL', 'required|trim');
+		$this->form_validation->set_rules('parent_id', 'Parent', 'required|integer');
 
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -163,7 +163,7 @@ class Al extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">×</a>', '</div>');
-		$this->form_validation->set_rules('name', 'Name', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('name', 'Name', 'required|trim');
 
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -189,7 +189,7 @@ class Al extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-error"><a class="close" data-dismiss="alert" href="#">×</a>', '</div>');
-		$this->form_validation->set_rules('name', 'Name', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('name', 'Name', 'required|trim');
 
 		if ($this->form_validation->run() === FALSE)
 		{
