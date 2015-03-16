@@ -260,7 +260,7 @@ class Adjacency_list_model extends CI_Model
 	 *
 	 * @return bool
 	 */
-	public function update_group($id, $data)
+	public function update_group($item_id, $data)
 	{
 		$data['slug'] = url_title($data['name'], '-', TRUE);
 		$this->db->where('id', $item_id)->update($this->tables['groups'], $data);
@@ -285,7 +285,7 @@ class Adjacency_list_model extends CI_Model
 	 *
 	 * @return bool
 	 */
-	public function delete_group($id)
+	public function delete_group($item_id)
 	{
 		$this->db->trans_start();
 
