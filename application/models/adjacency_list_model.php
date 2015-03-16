@@ -112,8 +112,8 @@ class Adjacency_list_model extends CI_Model
 	 */
 	public function update_item($item_id, $data)
 	{
-		$this->db->where('id', $item_id)->update($this->tables['lists'], $data);
-		if ($this->db->affected_rows())
+		$return = $this->db->where('id', $item_id)->update($this->tables['lists'], $data);
+		if ($return)
 		{
 			$this->session->set_flashdata($this->flash['success'], $this->lang->line('al_update_item_success'));
 			return TRUE;
@@ -263,8 +263,8 @@ class Adjacency_list_model extends CI_Model
 	public function update_group($item_id, $data)
 	{
 		$data['slug'] = url_title($data['name'], '-', TRUE);
-		$this->db->where('id', $item_id)->update($this->tables['groups'], $data);
-		if ($this->db->affected_rows())
+		$return = $this->db->where('id', $item_id)->update($this->tables['groups'], $data);
+		if ($return)
 		{
 			$this->session->set_flashdata($this->flash['success'], $this->lang->line('al_update_group_success'));
 			return TRUE;
