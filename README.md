@@ -13,7 +13,7 @@ How to start?
 
 You're ready to go - ``http://localhost/your_project/index.php/al``
 
-CodeIgniter v3 Compatibility
+CodeIgniter v3 compatibility
 ----------------------------
 
 Starting with CodeIgniter 3.0, all class filenames (libraries, drivers, controllers and models) must be named in a Ucfirst-like manner or in other words - they must start with a capital letter. So, you have to rename following files:
