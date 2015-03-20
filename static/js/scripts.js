@@ -1,10 +1,10 @@
 $(document).ready(function(){
-    
-    $("#loader").bind("ajaxSend", function(){
-        $(this).show();
-    }).bind("ajaxComplete", function(){
-        $(this).hide();
-    });
+
+    $(document).ajaxSend( function() {
+        $("#loader").show();
+    }).ajaxComplete( function(){
+        $("#loader").hide();
+    })
 
     if ($(".sortable").length > 0) {
 
@@ -25,18 +25,18 @@ $(document).ready(function(){
                 $.ajax({
                     type: 'post',
                     url: BASE_URL + 'index.php/al/reorder',
-                    data: { 
+                    data: {
                         order : $(this).nestedSortable('serialize'),
                         csrf_test_name: $.cookie('csrf_cookie_name')
                         }
-                });             
+                });
             }
         });
 
         $(".delete").click(function(){
-            var data_href = $(this).attr('data-href');
-            var data_name = $(this).attr('data-name');
-            var data_type = $(this).attr('data-type');
+            var data_href = $(this).data('href');
+            var data_name = $(this).data('name');
+            var data_type = $(this).data('type');
             if (data_type == 'group') {
                 $('.modal-body').html('<p>Do you really want to delete group: ' + data_name + '?</p>');
             } else {
@@ -47,9 +47,9 @@ $(document).ready(function(){
             return false;
         });
 
-        $('.sortable li div').live('mouseenter', function(){
+        $('.sortable li div').on('mouseenter', function(){
             $('span', this).fadeIn(100);
-        }).live('mouseleave', function(){
+        }).on('mouseleave', function(){
             $('span', this).fadeOut(100);
         });
     }
