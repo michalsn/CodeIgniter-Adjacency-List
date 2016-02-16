@@ -5,8 +5,8 @@
         </div>
 
         <?php if ($groups): ?>
-			<?php foreach ($groups as $group): ?>         
-    		<div class="info_wrapper"> 
+			<?php foreach ($groups as $group): ?>
+    		<div class="info_wrapper">
     			<div class="info_header">
     				<span class="info_title"><?php echo $group['name']; ?> (<?php echo $group['slug']; ?>)</span>
     				<a style="float:right;margin-top:-5px;" class="btn btn-danger delete" data-type="group" data-href="<?php echo site_url('al/delete_group/'.$group['id']); ?>" data-name="<?php echo $group['name']; ?>'" href="javascript:;"><i class="icon-trash icon-white"></i> Delete</a>
