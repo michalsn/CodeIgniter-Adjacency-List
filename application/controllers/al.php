@@ -172,7 +172,7 @@ class Al extends CI_Controller {
 		}
 		else
 		{
-			$this->adjacency_list->add_group($this->input->post());			
+			$this->adjacency_list->add_group($this->input->post());
 
 			redirect('al');
 		}

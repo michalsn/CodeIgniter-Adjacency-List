@@ -22,9 +22,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
         <script src="static/js/bootstrap.js"></script>
         <script src="static/js/jquery.cookie.js"></script>
-        <script src="static/js/jquery.mjs.nestedSortable.js"></script>	
+        <script src="static/js/jquery.mjs.nestedSortable.js"></script>
         <script src="static/js/scripts.js"></script>
-          
+
         <script>
           var BASE_URL = "<?php echo base_url(); ?>";
           var LIST_MAX_LEVELS = "<?php echo $this->config->item('max_levels', 'adjacency_list');?>";
@@ -55,7 +55,7 @@
 
         <div class="container">
 
-        <?php if (validation_errors()): ?>      
+        <?php if (validation_errors()): ?>
             <?php echo validation_errors(); ?>
         <?php endif; ?>
         <?php if ($this->session->flashdata('error')): ?>

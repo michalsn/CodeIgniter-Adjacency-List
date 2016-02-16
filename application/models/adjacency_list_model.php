@@ -8,7 +8,7 @@
  * @license http://opensource.org/licenses/MIT  (MIT)
  * @since   Version 0.1
  */
-class Adjacency_list_model extends CI_Model 
+class Adjacency_list_model extends CI_Model
 {
 	/**
 	 * Holds an array of used tables.
@@ -40,7 +40,7 @@ class Adjacency_list_model extends CI_Model
 		$this->lang->load('adjacency_list');
 
 		$this->tables = $this->config->item('tables', 'adjacency_list');
-		$this->flash  = $this->config->item('flash', 'adjacency_list');		
+		$this->flash  = $this->config->item('flash', 'adjacency_list');
 	}
 
 	//--------------------------------------------------------------------
@@ -63,7 +63,7 @@ class Adjacency_list_model extends CI_Model
 	}
 
 	//--------------------------------------------------------------------
-	
+
 	/**
 	 * get_item
 	 *
