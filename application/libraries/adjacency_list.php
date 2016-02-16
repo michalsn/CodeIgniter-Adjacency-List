@@ -114,8 +114,8 @@ class Adjacency_list
 					if ((($this->max_levels !== 0) && ($this->max_levels > $level + 1)) || ($this->max_levels === 0) || ($exclude === 0))
 					{
 						if (isset($leaf['children']) && ! empty($leaf['children']))
-						{						
-							$output += $this->get_all_for_dropdown($group_id, $exclude, $level + 1, $leaf['children']);	
+						{
+							$output += $this->get_all_for_dropdown($group_id, $exclude, $level + 1, $leaf['children']);
 						}
 					}
 				}

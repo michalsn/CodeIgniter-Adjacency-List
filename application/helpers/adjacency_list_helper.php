@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Adjacency List
  *
@@ -39,7 +39,7 @@ if ( ! function_exists('build_admin_tree'))
 				else
 				{
 					$output .= '<li id="list_' . $leaf['id'] . '"><div><i class="icon-move"></i> ' . $leaf['name'] . '<span><a class="btn btn-primary btn-mini" href="' . site_url('al/edit/'.$leaf['id']) . '"><i class="icon-pencil icon-white"></i> Edit</a> <a class="btn btn-danger btn-mini delete" data-toggle="modal" data-type="item" data-href="' . site_url('al/delete/' . $leaf['id']) . '" data-name="' . $leaf['name'] . '" href="javascript:;"><i class="icon-trash icon-white"></i> Delete</a></span></div></li>';
-				}	
+				}
 			}
 		}
 
@@ -96,7 +96,7 @@ if ( ! function_exists('build_tree'))
 				else
 				{
 					$output .= $atts['start_tag'] . '<a href="' . $leaf['url'] . '">' . $leaf['name'] . '</a>' . $atts['end_tag'];
-				}   
+				}
 			}
 		}
 
@@ -188,7 +188,7 @@ if ( ! function_exists('format_breadcrumb'))
 				else
 				{
 					$output .= $atts['start_tag'] . '<a href="' . $item['url'] . '">' . $item['name'] . '</a>' . $atts['divider'] . $atts['end_tag'];
-				}   
+				}
 			}
 		}
 
@@ -234,7 +234,7 @@ if ( ! function_exists('build_tree_item'))
 					build_tree_item($group, (int) $leaf['parent_id'], $attributes, $tree, $in_array);
 				}
 			}
-			
+
 			$tree     = parse_children($tree);
 			$in_array = array_reverse($in_array);
 
@@ -275,7 +275,7 @@ if ( ! function_exists('format_tree'))
 			foreach ($tree as &$leaf)
 			{
 				$leaf['name'] = htmlspecialchars($leaf['name'], ENT_QUOTES, 'UTF-8');
-				
+
 				if (isset($leaf['children']) && ! empty($leaf['children']) && (in_array($leaf['id'], $in_array)))
 				{
 					$output .= $atts['start_tag'] . '<a href="' . $leaf['url'] . '">' . $leaf['name'] . '</a>';
@@ -285,7 +285,7 @@ if ( ! function_exists('format_tree'))
 				else
 				{
 					$output .= $atts['start_tag'] . '<a href="' . $leaf['url'] . '">' . $leaf['name'] . '</a>' . $atts['end_tag'];
-				}   
+				}
 			}
 		}
 
@@ -300,7 +300,7 @@ if ( ! function_exists('parse_children'))
 	/**
 	 * Parse children
 	 *
-	 * Parse array and format it to subarrays with children 
+	 * Parse array and format it to subarrays with children
 	 *
 	 * @param $array &$query Array input
 	 *
