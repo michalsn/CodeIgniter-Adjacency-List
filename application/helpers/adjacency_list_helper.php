@@ -208,12 +208,12 @@ if ( ! function_exists('build_tree_item'))
 	 * @param mixed $group        Group id or slug
 	 * @param int   $item_id      Current item id
 	 * @param array $attributes   Any attributes
-	 * @param array &$tree        Tree array
+	 * @param array $tree         Tree array
 	 * @param array &$in_array    Output tree array
 	 *
 	 * @return string
 	 */
-	function build_tree_item($group, $item_id, $attributes = array(), &$tree = NULL, &$in_array = array())
+	function build_tree_item($group, $item_id, $attributes = array(), $tree = NULL, &$in_array = array())
 	{
 		if (empty($tree))
 		{
